@@ -247,9 +247,21 @@ window.prevPhoto = function () {
 window.openEventDetails = function () {
     const modal = document.getElementById("event-details-modal");
     modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden"; // Robust lock
 }
 
 window.closeEventDetails = function () {
     const modal = document.getElementById("event-details-modal");
     modal.classList.add("hidden");
+    document.body.style.overflow = "auto";
+    document.documentElement.style.overflow = "auto"; // Unlock
+}
+
+// Close modal when clicking outside content
+window.onclick = function(event) {
+    const modal = document.getElementById("event-details-modal");
+    if (event.target == modal) {
+        closeEventDetails();
+    }
 }
