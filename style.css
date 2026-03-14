@@ -528,6 +528,8 @@ MOBILE
     .glass-card {
         width: 100%;
         padding: 0.8rem 1rem;
+        justify-content: center;
+        text-align: center;
     }
 
     .info-container {
