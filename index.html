@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DIET College Farewell 2026</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Outfit:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- ===============================
+3D GATE
+=============================== -->
+
+    <div id="camera-container">
+
+        <div id="gate-wrapper">
+
+            <div class="gate-door left">
+                <div class="door-inner">
+                    <div class="gold-accent"></div>
+                    <div class="gold-accent"></div>
+                    <div class="knob left-knob"></div>
+                </div>
+            </div>
+
+            <div class="gate-door right">
+                <div class="door-inner">
+                    <div class="gold-accent"></div>
+                    <div class="gold-accent"></div>
+                    <div class="knob right-knob"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <canvas id="celebration-canvas"></canvas>
+
+    <!-- ===============================
+HERO SECTION
+=============================== -->
+
+    <main id="hero-content" class="hidden">
+
+        <h1 class="glow-text title">
+            🎓 DIET College <br> CSDM Legacy 2k26 Farewell Party
+        </h1>
+
+        <div class="info-container">
+
+            <div class="glass-card">
+                <span class="icon">📅</span>
+                <div>
+                    <p class="label">Date & Time</p>
+                    <p class="value">17-03-2026 | 09:00 AM to 04:00 PM </p>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <span class="icon">📍</span>
+                <div>
+                    <p class="label">Venue</p>
+                    <p class="value">Seminar Hall 1</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="countdown" class="glass-card countdown-container"></div>
+
+        <div class="actions">
+
+            <button class="btn primary" onclick="openSlider()">
+                Enter Celebration
+            </button>
+
+            <button class="btn glass" onclick="openEventDetails()">
+                Event Details
+            </button>
+
+            <button class="btn glass"
+                onclick="window.open('https://drive.google.com/drive/folders/18lpgzn-I9ntmPRgoZ0iOoN5LRRu2xQZe','_blank')">
+                Photo Gallery
+            </button>
+
+        </div>
+
+    </main>
+
+    <!-- ===============================
+PHOTO SLIDER MODAL
+=============================== -->
+
+    <div id="photo-slider" class="hidden">
+
+        <div class="slider-container">
+
+            <button class="close-slider" onclick="closeSlider()">✖</button>
+
+            <img id="slider-image" src="" alt="Farewell Photo">
+
+            <div class="slider-controls">
+
+                <button class="slider-btn" onclick="prevPhoto()">⬅ Prev</button>
+
+                <button class="slider-btn" onclick="nextPhoto()">Next ➡</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ===============================
+EVENT DETAILS MODAL
+=============================== -->
+    <div id="event-details-modal" class="hidden">
+        <div class="glass-card detail-modal-content">
+            <button class="close-modal" onclick="closeEventDetails()">✖</button>
+            <h2 class="glow-text">Event Schedule</h2>
+            <div class="schedule-list">
+                <div class="schedule-item">
+                    <div class="schedule-time-block">
+                        <span class="date">16-03-2026</span>
+                        <span class="time">3:00 PM To 4:30 PM</span>
+                    </div>
+                    <span class="event">Flash Mob</span>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time-block">
+                        <span class="date">17-03-2026</span>
+                        <span class="time">10:30 AM</span>
+                    </div>
+                    <span class="event">Inauguration Ceremony</span>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time-block">
+                        <span class="date">17-03-2026</span>
+                        <span class="time">11:30 AM</span>
+                    </div>
+                    <span class="event">Cultural Performances</span>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time-block">
+                        <span class="date">17-03-2026</span>
+                        <span class="time">01:30 PM</span>
+                    </div>
+                    <span class="event">Farewell Lunch</span>
+                </div>
+                <div class="schedule-item">
+                    <div class="schedule-time-block">
+                        <span class="date">17-03-2026</span>
+                        <span class="time">03:30 PM</span>
+                    </div>
+                    <span class="event">Grand Farewell Celebration</span>
+                </div>
+            </div>
+
+            <div class="coordinators-section">
+                <h3 class="glow-text sub-title">Faculty Co-ordinators</h3>
+                <div class="team-grid">
+                    <div class="team-block glass-card">
+                        <h4 class="team-role">Support & Guidance</h4>
+                        <div class="member-list">
+                            <div class="member-item">
+                                <p class="name">Mohan Babu</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="glow-text sub-title student-title">Student Co-ordinators</h3>
+                <div class="team-grid">
+                    <div class="team-block glass-card">
+                        <h4 class="team-role"> Faculty Inviting Team </h4>
+                        <div class="member-list">
+                            <div class="member-item">
+                                <p class="name">Kishore </p>
+
+                                <a href="tel:+917075178157" class="phone-number">📞 +91 7075178157</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Kanishka</p>
+
+                                <a href="tel:+917997818921" class="phone-number">📞 +91 7997818921</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Likith</p>
+
+                                <a href="tel:+918639511403" class="phone-number">📞 +91 8639511403</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Grishma</p>
+
+                                <a href="tel:+918309229499" class="phone-number">📞 +91 8309229499</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Durga</p>
+
+                                <a href="tel:+917207877893" class="phone-number">📞 +91 7207877893</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Abhishek</p>
+
+                                <a href="tel:+917997818921" class="phone-number">📞 +91 7997818921</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-block glass-card">
+                        <h4 class="team-role">STAGE AND ANCHORING TEAM</h4>
+                        <div class="member-list">
+                            <div class="member-item">
+                                <p class="name">P.Tejaram</p>
+                                <p class="roll-number">24u45a4217</p>
+                                <a href="tel:+917671807995" class="phone-number">📞 +91 7671807995</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">A.Sai Krishna</p>
+                                <p class="roll-number">24u45a4202</p>
+                                <a href="tel:+916305446757" class="phone-number">📞 +91 6305446757</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Sarvan</p>
+                                <p class="roll-number">23u41a4424</p>
+                                <a href="tel:+919989262726" class="phone-number">📞 +91 9989262726</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">K.Rohit Kumar</p>
+                                <p class="roll-number">23u41a4231</p>
+                                <a href="tel:+919000557557" class="phone-number">📞 +91 9000557557</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="team-block glass-card">
+                        <h4 class="team-role">FLASHMOB AND SOUND SYSTEM TEAM</h4>
+                        <div class="member-list">
+                            <div class="member-item">
+                                <p class="name">Akash</p>
+                                <p class="roll-number">23u41a4277</p>
+                                <a href="tel:+9182053720" class="phone-number">📞 +91 82053720</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Kalyan</p>
+                                <p class="roll-number">23u41a4243</p>
+                                <a href="tel:+919494926422" class="phone-number">📞 +91 9494926422</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <h2 class="glow-text sub-title student-title">Volunteers for Farewell</h2>
+                    <div class="team-block glass-card">
+                        <h4 class="team-role">Food And Replacement Team</h4>
+                        <div class="member-list">
+                            <div class="member-item">
+                                <p class="name">Lohtih</p>
+                                <p class="roll-number"> 23U41A4401</p>
+                                <a href="tel:+918106829882" class="phone-number">📞 +91 8106829882</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Divakar </p>
+                                <p class="roll-number">23U41A4414</p>
+                                <a href="tel:+919182664039" class="phone-number">📞 +91 9182664039</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Yuva Sai kiran</p>
+                                <p class="roll-number">24U41A4401</p>
+                                <a href="tel:+917997869879" class="phone-number">📞 +91 7997869879</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="team-block glass-card">
+                        <h4 class="team-role">Gifts and invitations</h4>
+                        <div class="member-list">
+                            <div class="member-item">
+                                <p class="name">Sowjanya</p>
+                                <p class="roll-number"> 24u45a4407</p>
+                                <a href="tel:+918340077874" class="phone-number">📞 +91 8340077874</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">PRAJNA </p>
+                                <p class="roll-number"> 23U41A4440</p>
+                                <a href="tel:+919014296461" class="phone-number">📞 +91 9014296461</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Vyshnavi</p>
+                                <p class="roll-number">24u45a4402</p>
+                                <a href="tel:+9170932 78025" class="phone-number">📞 +91 70932 78025</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Vardhani</p>
+                                <p class="roll-number">23U41A4427</p>
+                                <a href="tel:+919542929389" class="phone-number">📞 +91 9542929389</a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="team-block glass-card">
+                        <h4 class="team-role">Backup Team</h4>
+                        <div class="member-list">
+                            <div class="member-item">
+                                <p class="name">Bhanu kunar</p>
+                                <p class="roll-number"> 23U41A4412</p>
+                                <a href="tel:+917416734666" class="phone-number">📞 +91 7416734666</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Durga prasad  </p>
+                                <p class="roll-number">23U41A4415</p>
+                                <a href="tel:+919390883293" class="phone-number">📞 +91 9390883293</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Yeshwant</p>
+                                <p class="roll-number">23U41A4439</p>
+                                <a href="tel:+91 9573118478" class="phone-number">📞 +91 9573118478 </a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Sukumar  </p>
+                                <p class="roll-number">23U41A4442</p>
+                                <a href="tel:+918897695552" class="phone-number">📞 +91 8897695552</a>
+                            </div>
+                            <div class="member-item">
+                                <p class="name">Ajaykumar</p>
+                                <p class="roll-number">24u45A4404</p>
+                                <a href="tel:+917680053510" class="phone-number">📞 +91 7680053510</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================
+AUDIO
+=============================== -->
+
+    <audio id="gate-audio" src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_c8c8a73467.mp3">
+    </audio>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

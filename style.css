@@ -1,0 +1,587 @@
+:root {
+    --bg-dark: #0a0a0a;
+    --primary-gold: #ffd700;
+    --gold-glow: 0 0 15px rgba(255, 215, 0, 0.6);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom scrollbar for better mobile UX while staying minimal */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 215, 0, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 215, 0, 0.4);
+}
+
+* {
+    -ms-overflow-style: auto; /* IE and Edge */
+    scrollbar-width: thin;    /* Firefox */
+    scrollbar-color: rgba(255, 215, 0, 0.2) transparent;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+}
+
+/* =========================================
+3D GATE
+========================================= */
+
+#camera-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 3.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+}
+
+#camera-container.zoomed {
+    transform: translateZ(800px) scale(1.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#gate-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.gate-door {
+    width: 50%;
+    height: 100%;
+    transition: transform 3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: #111;
+    border: 2px solid #333;
+}
+
+.gate-door.left {
+    transform-origin: left center;
+    border-right: 4px solid var(--primary-gold);
+}
+
+.gate-door.right {
+    transform-origin: right center;
+    border-left: 4px solid var(--primary-gold);
+}
+
+.gate-door.left.open {
+    transform: rotateY(-100deg);
+}
+
+.gate-door.right.open {
+    transform: rotateY(100deg);
+}
+
+.door-inner {
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.gold-accent {
+    width: 80%;
+    height: 10px;
+    background: var(--primary-gold);
+    box-shadow: var(--gold-glow);
+    border-radius: 5px;
+}
+
+.knob {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 60px;
+    background: var(--primary-gold);
+    border-radius: 5px;
+}
+
+.left-knob {
+    right: 10px;
+}
+
+.right-knob {
+    left: 10px;
+}
+
+/* =========================================
+HERO SECTION
+========================================= */
+
+#hero-content {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.5s ease;
+    text-align: center;
+    padding: 20px;
+}
+
+#hero-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    text-align: center;
+    font-weight: 800;
+    color: var(--primary-gold);
+    margin-bottom: 2rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.info-container {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.icon {
+    font-size: 1.5rem;
+}
+
+.label {
+    font-size: .8rem;
+    letter-spacing: 2px;
+    color: #aaa;
+}
+
+.value {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* =========================================
+COUNTDOWN
+========================================= */
+
+.countdown-container {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.time-box {
+    text-align: center;
+}
+
+.time-val {
+    font-family: monospace;
+    font-size: 3rem;
+    color: var(--primary-gold);
+}
+
+.time-label {
+    font-size: .8rem;
+    color: #ccc;
+}
+
+/* =========================================
+BUTTONS
+========================================= */
+
+.actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    padding: .8rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: .3s;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, #ffd700, #b8860b);
+    color: black;
+}
+
+.btn.primary:hover {
+    transform: scale(1.05);
+}
+
+.btn.glass {
+    background: var(--glass-bg);
+    color: white;
+    border: 1px solid var(--glass-border);
+}
+
+.btn.glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================
+CONFETTI CANVAS
+========================================= */
+
+#celebration-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* =========================================
+PHOTO SLIDER
+========================================= */
+
+#photo-slider {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 200;
+}
+
+#slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.slider-container {
+    width: 90%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+}
+
+.slider-controls {
+    margin-top: 25px;
+    display: flex;
+    gap: 20px;
+}
+
+.slider-controls button {
+    padding: 10px 25px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffd700, #b8860b);
+    color: black;
+}
+
+.close-slider {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* =========================================
+EVENT DETAILS MODAL
+========================================= */
+
+#event-details-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 250;
+    padding: 20px;
+}
+
+.detail-modal-content {
+    max-width: 600px;
+    width: 95%;
+    position: relative;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    max-height: 85vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover {
+    color: var(--primary-gold);
+}
+
+.schedule-list {
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    gap: 1rem;
+}
+
+.schedule-time-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+}
+
+.schedule-item .date {
+    font-size: 0.75rem;
+    color: #aaa;
+    letter-spacing: 1px;
+}
+
+.schedule-item .time {
+    color: var(--primary-gold);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.coordinators-section {
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+    padding-top: 1.5rem;
+}
+
+.sub-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    color: var(--primary-gold);
+}
+
+.student-title {
+    margin-top: 2rem;
+}
+
+.team-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.team-block {
+    padding: 1.5rem;
+    display: block; /* Overriding glass-card flex center */
+}
+
+.team-role {
+    color: var(--primary-gold);
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.member-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.member-item {
+    padding: 0.5rem;
+}
+
+.member-item .name {
+    font-weight: 600;
+    color: white;
+    font-size: 1rem;
+}
+
+.member-item .roll-number {
+    font-size: 0.75rem;
+    color: #aaa;
+    letter-spacing: 0.5px;
+}
+
+.member-item .phone-number {
+    font-size: 0.8rem;
+    color: var(--primary-gold);
+    text-decoration: none;
+    display: block;
+    margin-top: 4px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.member-item .phone-number:hover {
+    opacity: 1;
+}
+
+/* =========================================
+TABLET
+========================================= */
+
+@media (max-width:1024px) {
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .time-val {
+        font-size: 2.5rem;
+    }
+
+}
+
+/* =========================================
+MOBILE
+========================================= */
+
+@media (max-width:768px) {
+    body {
+        overflow: auto;
+    }
+
+    .title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .glass-card {
+        width: 100%;
+        padding: 0.8rem 1rem;
+    }
+
+    .info-container {
+        gap: 1rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 0.8rem;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .schedule-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .schedule-time-block {
+        width: 100%;
+    }
+
+    .member-list {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-modal-content {
+        padding: 1.5rem 1rem;
+    }
+}
+
+/* =========================================
+SMALL PHONE
+========================================= */
+
+@media (max-width:480px) {
+
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .time-val {
+        font-size: 1.6rem;
+    }
+
+    .btn {
+        width: 90%;
+        font-size: 0.9rem;
+    }
+
+}
