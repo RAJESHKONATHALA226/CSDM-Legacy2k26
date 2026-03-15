@@ -259,9 +259,184 @@ window.closeEventDetails = function () {
 }
 
 // Close modal when clicking outside content
-window.onclick = function(event) {
+window.onclick = function (event) {
     const modal = document.getElementById("event-details-modal");
     if (event.target == modal) {
         closeEventDetails();
     }
 }
+
+/* ===============================
+6️⃣ API GALLERY (GRID VIEW)
+=============================== */
+
+window.openApiGallery = async function () {
+    const modal = document.getElementById("api-gallery-modal");
+    const grid = document.getElementById("api-gallery-grid");
+
+    modal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    // Clear previous content and show loader
+    grid.innerHTML = '<div class="loader">Loading Gallery...</div>';
+
+    try {
+        const response = await fetch("https://happy.strlearners.site/api/images/");
+        const images = await response.json();
+
+        if (!images || images.length === 0) {
+            grid.innerHTML = '<div class="loader">No images found.</div>';
+            return;
+        }
+
+        grid.innerHTML = ""; // Clear loader
+
+        images.forEach(imgData => {
+            const item = document.createElement("div");
+            item.className = "grid-item";
+
+            const img = document.createElement("img");
+            const fullUrl = `https://happy.strlearners.site/${imgData.path}`;
+            img.src = fullUrl;
+            img.alt = imgData.filename;
+
+            img.onload = () => img.classList.add("loaded");
+
+            // Create action overlay
+            const actionsContainer = document.createElement("div");
+            actionsContainer.className = "image-actions";
+
+            // WhatsApp Share Button (Guarantees Text + Link)
+            const waBtn = document.createElement("button");
+            waBtn.className = "action-btn wa-btn";
+            waBtn.innerHTML = "💬"; // WhatsApp symbol or chat bubble
+            waBtn.title = "Share to WhatsApp";
+            waBtn.style.borderColor = "#25D366"; // WhatsApp Green
+            waBtn.onclick = (e) => {
+                e.stopPropagation();
+                const text = encodeURIComponent(`CSDM Legacy 2K26 Farewell party\n\nCheck out this photo: ${fullUrl}`);
+                window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+            };
+
+            // Share Button (Generic OS Share)
+            const shareBtn = document.createElement("button");
+            shareBtn.className = "action-btn share-btn";
+            shareBtn.innerHTML = "🔗"; // Share symbol
+            shareBtn.title = "Share via Device";
+            shareBtn.onclick = (e) => {
+                e.stopPropagation(); // Avoid triggering other clicks
+                shareImage(fullUrl, imgData.filename);
+            };
+            
+            // Download Button
+            const downloadBtn = document.createElement("button");
+            downloadBtn.className = "action-btn download-btn";
+            downloadBtn.innerHTML = "⬇"; // Download symbol
+            downloadBtn.title = "Download Image";
+            downloadBtn.onclick = (e) => {
+                e.stopPropagation();
+                downloadImage(fullUrl, imgData.filename);
+            };
+            
+            actionsContainer.appendChild(waBtn);
+            actionsContainer.appendChild(shareBtn);
+            actionsContainer.appendChild(downloadBtn);
+
+            item.appendChild(img);
+            item.appendChild(actionsContainer);
+            grid.appendChild(item);
+        });
+
+    } catch (error) {
+        console.error("Gallery fetch failed:", error);
+        grid.innerHTML = '<div class="loader" style="color: #ff4444;">Failed to load images. Please try again.</div>';
+    }
+}
+
+// Download Helper
+async function downloadImage(url, filename) {
+    try {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = blobUrl;
+        a.download = filename || 'farewell-photo.jpeg';
+
+        document.body.appendChild(a);
+        a.click();
+
+        window.URL.revokeObjectURL(blobUrl);
+        document.body.removeChild(a);
+    } catch (err) {
+        console.error("Failed to download image:", err);
+        alert("Could not download the image.");
+    }
+}
+
+// Share Helper
+async function shareImage(url, filename) {
+    const shareText = 'CSDM Legacy 2K26 Farewell party\n\nCheck out this photo: ' + url;
+    
+    if (navigator.share) {
+        try {
+            // Attempt to fetch the image to share as a file (better for WhatsApp)
+            const response = await fetch(url);
+            const blob = await response.blob();
+            // Determine a safe fallback extension if filename doesn't have one
+            const ext = blob.type.split('/')[1] || 'jpeg';
+            const safeFilename = filename || `farewell-photo.${ext}`;
+            const file = new File([blob], safeFilename, { type: blob.type });
+
+            // Check if the browser supports sharing this file
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    title: 'CSDM Legacy 2K26 Farewell party',
+                    text: 'CSDM Legacy 2K26 Farewell party',
+                    files: [file]
+                });
+            } else {
+                // Fallback to simpler share if file sharing isn't supported
+                await navigator.share({
+                    title: 'CSDM Legacy 2K26 Farewell party',
+                    text: shareText
+                });
+            }
+        } catch (err) {
+            console.error('Share failed:', err);
+            // If the advanced share failed (e.g. user aborted, or file share error), attempt basic text/url share
+            try {
+                await navigator.share({
+                    title: 'CSDM Legacy 2K26 Farewell party',
+                    text: shareText
+                });
+            } catch (fallbackErr) {
+                console.error('Fallback Share failed:', fallbackErr);
+            }
+        }
+    } else {
+        // Fallback: Copy to clipboard
+        navigator.clipboard.writeText(shareText).then(() => {
+            alert('Image link and message copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+            prompt("Copy this to share:", shareText);
+        });
+    }
+}
+
+window.closeApiGallery = function () {
+    const modal = document.getElementById("api-gallery-modal");
+    modal.classList.add("hidden");
+    document.body.style.overflow = "auto";
+}
+
+// Close API modal when clicking outside
+window.addEventListener("click", (event) => {
+    const apiModal = document.getElementById("api-gallery-modal");
+    if (event.target === apiModal) {
+        closeApiGallery();
+    }
+});

@@ -88,11 +88,11 @@ HERO SECTION
             <button class="btn glass" onclick="openEventDetails()">
                 Event Details
             </button>
-
-            <button class="btn glass"
-                onclick="window.open('https://drive.google.com/drive/folders/18lpgzn-I9ntmPRgoZ0iOoN5LRRu2xQZe','_blank')">
+            
+            <button class="btn glass" onclick="openApiGallery()">
                 Photo Gallery
             </button>
+
 
         </div>
 
@@ -364,6 +364,20 @@ EVENT DETAILS MODAL
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===============================
+API GALLERY MODAL (GRID VIEW)
+=============================== -->
+    <div id="api-gallery-modal" class="hidden">
+        <div class="glass-card api-gallery-content">
+            <button class="close-modal" onclick="closeApiGallery()">✖</button>
+            <h2 class="glow-text">Photo Gallery</h2>
+            <div id="api-gallery-grid" class="image-grid">
+                <!-- Images will be injected here -->
+                <div class="loader">Loading Magic...</div>
             </div>
         </div>
     </div>
