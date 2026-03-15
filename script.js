@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 4️⃣ RANDOM PHOTO SLIDER
 =============================== */
 
-const TOTAL_IMAGES = 4;
+const TOTAL_IMAGES = 6;
 
 let images = [];
 let currentIndex = 0;
