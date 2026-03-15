@@ -182,7 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
 4️⃣ RANDOM PHOTO SLIDER
 =============================== */
 
-const TOTAL_IMAGES = 13;
+const TOTAL_IMAGES = 2;
 
 let images = [];
 let currentIndex = 0;
@@ -190,7 +190,7 @@ let sliderInterval = null;
 
 /* load numbered images */
 for (let i = 1; i <= TOTAL_IMAGES; i++) {
-    images.push(`assets/${i}.jpg`);
+    images.push(`assets/${i}.jpeg`);
 }
 
 /* shuffle images */
