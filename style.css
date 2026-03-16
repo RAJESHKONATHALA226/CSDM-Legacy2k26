@@ -797,19 +797,53 @@ API GALLERY MODAL
 }
 
 @media (max-width: 768px) {
-    .image-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 12px;
+    #api-gallery-modal {
+        padding: 10px;
     }
+
     .api-gallery-content {
+        width: 100%;
+        max-width: 100%;
+        margin: 1rem auto;
         padding: 2rem 1rem;
-        margin: 2rem auto;
+        border-radius: 12px;
+        max-height: 90vh;
     }
+
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-top: 1rem;
+    }
+
+    .api-gallery-content h2.glow-text {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
     /* Always show actions faintly on mobile */
     .image-actions {
         opacity: 1;
-        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 40%);
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
         align-items: flex-end;
-        padding-bottom: 10px;
+        padding-bottom: 5px;
+        gap: 8px;
+    }
+
+    .action-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns still looks better than 1 big block */
+        gap: 5px;
+    }
+    
+    .api-gallery-content {
+        padding: 1.5rem 0.5rem;
     }
 }
