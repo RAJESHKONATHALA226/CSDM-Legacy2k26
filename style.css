@@ -205,6 +205,20 @@ HERO SECTION
 .close-modal { position:absolute; top:15px; right:20px; background:none; border:none; color:white; font-size:1.5rem; cursor:pointer; transition: color 0.3s;}
 .close-modal:hover { color: var(--primary-gold); }
 
+/* Event Agenda Styles */
+.agenda-container { margin-top: 1rem; text-align: left; }
+.agenda-title { font-family: 'Cinzel', serif; color: var(--primary-gold); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid rgba(255,215,0,0.3); padding-bottom: 0.5rem; }
+.agenda-meta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
+.meta-item { display: flex; align-items: center; gap: 0.8rem; background: rgba(0,0,0,0.3); padding: 0.8rem 1.2rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+.agenda-list { display: grid; grid-template-columns: minmax(180px, auto) 1fr; gap: 0.8rem 1.5rem; background: rgba(255,255,255,0.03); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(255,215,0,0.1); }
+.schedule-item { display: contents; }
+.schedule-item:hover .time, .schedule-item:hover .event { background: rgba(255,255,255,0.08); }
+.schedule-item .time, .schedule-item .event { padding: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s ease; display: flex; align-items: center; }
+.schedule-item .time { color: var(--primary-gold); font-family: monospace; font-size: 1.1rem; font-weight: 600; justify-content: flex-end; border-right: 2px solid rgba(255,215,0,0.3); padding-right: 1.5rem; }
+.schedule-item .event { font-size: 1.1rem; justify-content: flex-start; padding-left: 0.5rem; }
+.schedule-item.break .time, .schedule-item.break .event { background: rgba(255,255,255,0.01); color: #ccc; }
+.schedule-item.break .time { color: #aaa; border-right-color: #666; }
+
 /* API Gallery */
 #api-gallery-modal { position:fixed; inset:0; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); overflow-y:auto; -webkit-overflow-scrolling:touch; z-index:1000; padding:20px; display:none;}
 #api-gallery-modal:not(.hidden) { display:block; }
@@ -231,7 +245,12 @@ HERO SECTION
     .info-container{ gap:1rem;}
     .actions{ flex-direction:column; width:100%; gap:0.8rem; }
     .btn{ width:100%; max-width:300px;}
-    .schedule-item{ flex-direction:column; align-items:flex-start; gap:0.5rem;}
+    .agenda-list { grid-template-columns: 1fr; gap: 0; padding: 1rem; }
+    .schedule-item { display:flex; flex-direction:column; background:rgba(255,255,255,0.02); margin-bottom: 1rem; border-radius: 8px; border-left: 3px solid var(--primary-gold); overflow: hidden; }
+    .schedule-item.break { border-left-color: #666; }
+    .schedule-item .time, .schedule-item .event { border: none; padding: 0.6rem 1rem; justify-content: flex-start; align-items: flex-start; }
+    .schedule-item .time { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.4rem; font-size: 1rem; }
+    .schedule-item .event { padding-top: 0.4rem; }
     .member-list{ grid-template-columns:1fr; gap:0.5rem;}
     .detail-modal-content, .api-gallery-content{ margin:2rem auto; width:100%; padding:1.5rem 1rem;}
     .image-grid{ grid-template-columns:repeat(2, 1fr); gap:15px;}
