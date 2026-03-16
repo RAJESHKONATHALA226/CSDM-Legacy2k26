@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (audio) {
             audio.volume = 0.5;
-            audio.play().catch(() => { });
+            audio.play().catch(() => {});
         }
 
         setTimeout(() => {
@@ -74,8 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-
         resizeCanvas();
+
         const particles = [];
         const colors = ["#ffd700","#ffaa00","#ffffff","#8e44ad","#9b59b6"];
 
@@ -111,11 +111,9 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             requestAnimationFrame(draw);
         }
-
         draw();
         window.addEventListener("resize", resizeCanvas);
     }
-
 });
 
 /* ===============================
@@ -128,12 +126,16 @@ let sliderInterval = null;
 
 for(let i=1;i<=TOTAL_IMAGES;i++){ images.push(`assets/${i}.jpeg`); }
 
-function shuffle(array){ for(let i=array.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [array[i],array[j]]=[array[j],array[i]]; } }
+function shuffle(array){ 
+    for(let i=array.length-1;i>0;i--){ 
+        const j=Math.floor(Math.random()*(i+1)); 
+        [array[i],array[j]]=[array[j],array[i]]; 
+    } 
+}
 
 window.openSlider = function(){
     const slider = document.getElementById("photo-slider");
     const img = document.getElementById("slider-image");
-
     shuffle(images);
     slider.classList.remove("hidden");
     currentIndex=0;
@@ -197,7 +199,7 @@ window.openApiGallery = async function(){
     try{
         const response = await fetch("https://happy.strlearners.site/api/images");
         const result = await response.json();
-        const images = result.data; // ✅ FIX
+        const images = result.data; // ✅ Use correct data path
 
         if(!images || images.length===0){
             grid.innerHTML='<div class="loader">No images found.</div>';
@@ -210,8 +212,11 @@ window.openApiGallery = async function(){
             const item = document.createElement("div");
             item.className="grid-item";
 
+            // Clean URL
+            const path = imgData.path.replace(/^https?:\/\//,''); // remove duplicate https
+            const fullUrl = `https://happy.strlearners.site/${path.replace(/\.jpeg$/i,'')}`;
+
             const img = document.createElement("img");
-            const fullUrl = `https://happy.strlearners.site${imgData.path}`;
             img.src = fullUrl;
             img.alt = imgData.filename || "gallery image";
             img.onload=()=>img.classList.add("loaded");
@@ -227,7 +232,10 @@ window.openApiGallery = async function(){
             waBtn.className="action-btn wa-btn";
             waBtn.innerHTML="💬";
             waBtn.title="Share to WhatsApp";
-            waBtn.onclick=(e)=>{ e.stopPropagation(); window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`CSDM Legacy 2K26 Farewell 🎉\n\n${fullUrl}`)}`,'_blank'); };
+            waBtn.onclick=(e)=>{ 
+                e.stopPropagation(); 
+                window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`CSDM Legacy 2K26 Farewell 🎉\n\n${fullUrl}`)}`,'_blank'); 
+            };
 
             // Share
             const shareBtn=document.createElement("button");
