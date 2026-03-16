@@ -177,8 +177,8 @@ window.openEventDetails = function(){
 window.closeEventDetails = function(){
     const modal = document.getElementById("event-details-modal");
     modal.classList.add("hidden");
-    document.body.style.overflow="auto";
-    document.documentElement.style.overflow="auto";
+    document.body.style.overflow="";
+    document.documentElement.style.overflow="";
 }
 window.onclick = function(event){
     const modal = document.getElementById("event-details-modal");
@@ -194,6 +194,7 @@ window.openApiGallery = async function(){
 
     modal.classList.remove("hidden");
     document.body.style.overflow="hidden";
+    document.documentElement.style.overflow="hidden";
     grid.innerHTML='<div class="loader">Loading Gallery...</div>';
 
     try{
@@ -311,7 +312,8 @@ async function shareImage(url, filename){
 window.closeApiGallery=function(){
     const modal=document.getElementById("api-gallery-modal");
     modal.classList.add("hidden");
-    document.body.style.overflow="auto";
+    document.body.style.overflow="";
+    document.documentElement.style.overflow="";
 }
 
 window.addEventListener("click",(event)=>{
