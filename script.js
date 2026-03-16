@@ -210,6 +210,8 @@ window.openSlider = function () {
     slider.classList.remove("hidden");
     currentIndex = 0;
     img.src = images[currentIndex];
+    img.style.cursor = "pointer";
+    img.onclick = () => window.open(img.src, '_blank');
 
     // Clear any existing interval before starting a new one
     if (sliderInterval) clearInterval(sliderInterval);
@@ -301,6 +303,10 @@ window.openApiGallery = async function () {
             img.alt = imgData.filename;
 
             img.onload = () => img.classList.add("loaded");
+
+            // Open in New Tab on Click
+            item.style.cursor = "pointer";
+            item.onclick = () => window.open(fullUrl, '_blank');
 
             // Create action overlay
             const actionsContainer = document.createElement("div");
