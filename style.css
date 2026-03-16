@@ -666,7 +666,7 @@ API GALLERY MODAL
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(15px);
     overflow-y: auto;
-    z-index: 300;
+    z-index: 1000;
     padding: 20px;
     display: none;
 }

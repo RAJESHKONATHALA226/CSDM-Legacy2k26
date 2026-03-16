@@ -320,7 +320,7 @@ window.openApiGallery = async function () {
             waBtn.style.borderColor = "#25D366"; // WhatsApp Green
             waBtn.onclick = (e) => {
                 e.stopPropagation();
-                const text = encodeURIComponent(`CSDM Legacy 2K26 Farewell party\n\nCheck out this photo: ${fullUrl}`);
+                const text = encodeURIComponent(`CSDM Legacy 2K26 Farewell party Powered By Strlearners\n\nCheck out this photo: ${fullUrl}`);
                 window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
             };
 
@@ -333,7 +333,7 @@ window.openApiGallery = async function () {
                 e.stopPropagation(); // Avoid triggering other clicks
                 shareImage(fullUrl, imgData.filename);
             };
-            
+
             // Download Button
             const downloadBtn = document.createElement("button");
             downloadBtn.className = "action-btn download-btn";
@@ -343,7 +343,7 @@ window.openApiGallery = async function () {
                 e.stopPropagation();
                 downloadImage(fullUrl, imgData.filename);
             };
-            
+
             actionsContainer.appendChild(waBtn);
             actionsContainer.appendChild(shareBtn);
             actionsContainer.appendChild(downloadBtn);
@@ -385,7 +385,7 @@ async function downloadImage(url, filename) {
 // Share Helper
 async function shareImage(url, filename) {
     const shareText = 'CSDM Legacy 2K26 Farewell party\n\nCheck out this photo: ' + url;
-    
+
     if (navigator.share) {
         try {
             // Attempt to fetch the image to share as a file (better for WhatsApp)
