@@ -186,7 +186,7 @@ window.onclick = function(event){
 }
 
 /* ===============================
-6️⃣ API GALLERY (GRID VIEW)
+6️⃣ API GALLERY (GRID VIEW) FIXED
 =============================== */
 window.openApiGallery = async function(){
     const modal = document.getElementById("api-gallery-modal");
@@ -212,7 +212,7 @@ window.openApiGallery = async function(){
             const item = document.createElement("div");
             item.className="grid-item";
 
-            // Correct full URL
+            // ✅ Correctly build full URL
             let fullUrl = imgData.path;
             if(!fullUrl.startsWith("http")){
                 fullUrl = `https://happy.strlearners.site/${fullUrl}`;
