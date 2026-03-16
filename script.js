@@ -199,7 +199,7 @@ window.openApiGallery = async function(){
     try{
         const response = await fetch("https://happy.strlearners.site/api/images");
         const result = await response.json();
-        const images = result.data; // ✅ Use correct data path
+        const images = result.data;
 
         if(!images || images.length===0){
             grid.innerHTML='<div class="loader">No images found.</div>';
@@ -212,14 +212,17 @@ window.openApiGallery = async function(){
             const item = document.createElement("div");
             item.className="grid-item";
 
-            // Clean URL
-            const path = imgData.path.replace(/^https?:\/\//,''); // remove duplicate https
-            const fullUrl = `https://happy.strlearners.site/${path.replace(/\.jpeg$/i,'')}`;
+            // Correct full URL
+            let fullUrl = imgData.path;
+            if(!fullUrl.startsWith("http")){
+                fullUrl = `https://happy.strlearners.site/${fullUrl}`;
+            }
 
             const img = document.createElement("img");
             img.src = fullUrl;
             img.alt = imgData.filename || "gallery image";
             img.onload=()=>img.classList.add("loaded");
+            img.onerror = ()=>img.src = "https://via.placeholder.com/400x400?text=Image+Not+Found";
 
             item.style.cursor="pointer";
             item.onclick=()=>window.open(fullUrl,'_blank');
@@ -227,7 +230,6 @@ window.openApiGallery = async function(){
             const actionsContainer=document.createElement("div");
             actionsContainer.className="image-actions";
 
-            // WhatsApp
             const waBtn=document.createElement("button");
             waBtn.className="action-btn wa-btn";
             waBtn.innerHTML="💬";
@@ -237,14 +239,12 @@ window.openApiGallery = async function(){
                 window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(`CSDM Legacy 2K26 Farewell 🎉\n\n${fullUrl}`)}`,'_blank'); 
             };
 
-            // Share
             const shareBtn=document.createElement("button");
             shareBtn.className="action-btn share-btn";
             shareBtn.innerHTML="🔗";
             shareBtn.title="Share";
             shareBtn.onclick=(e)=>{ e.stopPropagation(); shareImage(fullUrl,imgData.filename); };
 
-            // Download
             const downloadBtn=document.createElement("button");
             downloadBtn.className="action-btn download-btn";
             downloadBtn.innerHTML="⬇";
