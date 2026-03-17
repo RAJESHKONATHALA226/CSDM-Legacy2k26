@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ===============================
        2️⃣ COUNTDOWN
     =============================== */
-    const targetDate = new Date("2026-03-17T10:00:00").getTime();
+    const targetDate = new Date("2026-03-17T10:20:00").getTime();
     const countdownContainer = document.getElementById("countdown");
 
     function updateCountdown() {
